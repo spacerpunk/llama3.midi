@@ -4,3 +4,7 @@ bitsandbytes
 accelerate
 peft
 gradio
+mingus
+mido
+python-rtmidi
+rtmidi
