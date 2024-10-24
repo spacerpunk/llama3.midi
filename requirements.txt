@@ -1,0 +1,6 @@
+ollama
+transformers
+bitsandbytes
+accelerate
+peft
+gradio
