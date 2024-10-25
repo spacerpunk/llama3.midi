@@ -7,27 +7,25 @@ import mingus.core.notes as notes
 import mingus.core.scales as scales
 from mingus.containers import Note
 
-# inputs = mido.get_input_names()
-# outputs = mido.get_output_names()
+inputs = mido.get_input_names()
+outputs = mido.get_output_names()
 
-# print('inputs: ', inputs)
-# print('outputs: ', outputs)
+print('inputs: ', inputs)
+print('outputs: ', outputs)
 
 # select a MIDI input port by name
 # input_port = mido.open_input('Keystation 88 1')
 
 # create a MIDI out port
-midi_out = mido.open_output("loopMIDI Port 1")
+#midi_out = mido.open_output("loopMIDI Port 2")
 #midi_out_2 = mido.open_output("Python Out 4")
 
 bpm = 60 / 100
 
 #Defines Scales
-notes = ["C", "D", "E", "F", "G", "A", "B"]
+#notes = ["C", "D", "E", "F", "G", "A", "B"]
+notes = ["C", "C", "C", "C", "C", "C", "C"]
 print(notes[random.randrange(0,len(notes))])
-
-#Old Midi Notes
-cMajor = [60, 62, 64, 65, 67, 69, 71, 72]
 
 ionian = scales.Ionian(notes[random.randrange(0,len(notes))])
 aeolian = scales.Aeolian(notes[random.randrange(0,len(notes))])
@@ -40,14 +38,13 @@ notesArray = []
 #Convert Mingus Notation to Midi Notation using the "Notes Class" and stores the new midi notes in the empty array
 def convertNotes():
     scale = scales[random.randrange(0,len(scales))]
-    scale = naturalMinor
     print(scale)
     for note in scale.ascending():
         n = int(Note(note, random.randrange(4,5)))
         notesArray.append(n)
         
 convertNotes()
-print(notesArray)
+print(notesArray + ['tuki', 'mami'])
 
 #Generates Midi Notes and Sends it out
 def noteGenerator(velocity, velocity2):
@@ -71,7 +68,7 @@ def sequenceGenerator(numberOfNotes):
         noteGenerator(random.randrange(35,100),random.randrange(30,80))
     #sequenceGenerator(numberOfNotes)
         
-sequenceGenerator(10)    
+#sequenceGenerator(10)    
 
 # # loop to receive MIDI messages
 # for message in input_port:
@@ -79,6 +76,6 @@ sequenceGenerator(10)
 #     sequenceGenerator(2)
 
 # close the MIDI out port
-midi_out.close()
+#midi_out.close()
 
 
