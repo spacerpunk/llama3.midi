@@ -53,5 +53,3 @@ def runLlama():
      # Initialize recognizer class (for recognizing the speech)
 
 
-for a in range(15):
-    runLlama()

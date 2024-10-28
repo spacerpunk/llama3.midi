@@ -10,30 +10,6 @@ messages = []
 USER = 'user'
 ASSISTANT = 'assistant'
 
-def add_history(content, role):
-    messages.append({'role': role, 'content': content})
-
-
-
-#import speech_recognition as sr
-
-# # Initialize recognizer class (for recognizing the speech)
-# r = sr.Recognizer()
-
-# with sr.Microphone() as source:
-#     print("Talk")
-#     audio_text = r.listen(source)
-#     print("Time over, thanks")
-#     # recoginze_() method will throw a request
-#     # error if the API is unreachable,
-#     # hence using exception handling
-    
-#     try:
-#         # using google speech recognition
-#         print("Text: "+r.recognize_google(audio_text))
-#     except:
-#          print("Sorry, I did not get that")
-
 # API endpoint
 url = "http://localhost:11434/api/chat"
 
@@ -50,10 +26,10 @@ payload = {
     # "format":"json",
     "messages": [
         {"role": "user", 
-        "content": constant + example + prompt + end}
+        "content": "hello!"} #constant + example + prompt + end
     ],
-    "stream": True,
-    "temperature": 0.3,
+    "stream": False,
+    "temperature": 0,
     "n_context": 8000,
     "seed": 4815162342
 }
@@ -63,36 +39,33 @@ response = requests.post(url, json=payload)
 
 # Get response
 result = response.json()
-midi_json = json.loads(result["message"]["content"])
-#print(midi_json)
+midi_json = json.loads(result["message"])
+print(midi_json)
 
-#event = midi_json[0]["event"]
-#note = midi_json[0]["note"]
-#velocity = midi_json[0]["velocity"]
-#time = midi_json[0]["time"] 
+def add_history(content, role):
+    messages.append({'role': role, 'content': content})
 
 # Play the sequence of notes
-def playMidi(event,note,velocity,time):
-    message = Message(event, note=note, velocity=int(velocity), time=int(time))
-    print(message)
-    #port.send(message)
+# def playMidi(event,note,velocity,time):
+#     message = Message(event, note=note, velocity=int(velocity), time=int(time))
+#     print(message)
+#     #port.send(message)
 
+# index = 0
+# for n in midi_json:
+#     event = midi_json[index]["event"]
+#     note = midi_json[index]["note"]
+#     velocity = midi_json[index]["velocity"]
+#     time = midi_json[index]["time"] 
 
-index = 0
-for n in midi_json:
-    event = midi_json[index]["event"]
-    note = midi_json[index]["note"]
-    velocity = midi_json[index]["velocity"]
-    time = midi_json[index]["time"] 
+#     playMidi(event,note,velocity,time)
+#     index += 1
+#     print(index)
 
-    playMidi(event,note,velocity,time)
-    index += 1
-    print(index)
-
-    #print(midi_json)
-    #print(event)
-    #print(note)
-    #print(velocity)
-    #print(time)
+#     #print(midi_json)
+#     #print(event)
+#     #print(note)
+#     #print(velocity)
+#     #print(time)
 
 
