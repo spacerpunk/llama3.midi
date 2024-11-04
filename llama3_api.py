@@ -45,27 +45,27 @@ print(midi_json)
 def add_history(content, role):
     messages.append({'role': role, 'content': content})
 
-# Play the sequence of notes
-# def playMidi(event,note,velocity,time):
-#     message = Message(event, note=note, velocity=int(velocity), time=int(time))
-#     print(message)
-#     #port.send(message)
+#Play the sequence of notes
+def playMidi(event,note,velocity,time):
+    message = Message(event, note=note, velocity=int(velocity), time=int(time))
+    print(message)
+    #port.send(message)
 
-# index = 0
-# for n in midi_json:
-#     event = midi_json[index]["event"]
-#     note = midi_json[index]["note"]
-#     velocity = midi_json[index]["velocity"]
-#     time = midi_json[index]["time"] 
+index = 0
+for n in midi_json:
+    event = midi_json[index]["event"]
+    note = midi_json[index]["note"]
+    velocity = midi_json[index]["velocity"]
+    time = midi_json[index]["time"] 
 
-#     playMidi(event,note,velocity,time)
-#     index += 1
-#     print(index)
+    playMidi(event,note,velocity,time)
+    index += 1
+    print(index)
 
-#     #print(midi_json)
-#     #print(event)
-#     #print(note)
-#     #print(velocity)
-#     #print(time)
+    #print(midi_json)
+    #print(event)
+    #print(note)
+    #print(velocity)
+    #print(time)
 
 

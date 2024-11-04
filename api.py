@@ -1,3 +1,4 @@
+import random
 import requests
 import json
 import mingus.core.notes as notes
@@ -8,14 +9,14 @@ import time
 USER = 'user'
 ASSISTANT = 'assistant'
 model = 'llama3.2:latest'
-bpm = 60 / 100
+bpm = 60
 
 # PROMPT
 constant =  "You are a helpful agent that only responds with a single JSON object for MIDI. Do not provide explanations or other text outside of the JSON object. If you need to provide an explanation, generate an appropriate response in JSON format. "
-example = "the exact response of the JSON File shoud be in this format [{'event':'note_on', 'note':'60', 'velocity':64, 'time':0.5}], Velocity should be within 0 and 127 and always be an integer number, not always the same number. "
-end = "Please respond with only a single JSON object and no additional text."
+example = "the exact response of the JSON File shoud be in this format [{'event':event_value, 'note':note_value, 'velocity':velocity_value, 'time':0.5}], Velocity should be within 0 and 127 and always be an integer number, not always the same number. "
+end = "Please respond with only a single JSON object with note_on, note_off, note, duration and velocity data, 50 notes and no additional text."
 #prompt = input('Prompt: ')
-prompt = "give a midi file in C Major, with note_on, note_off, note, duration and velocity data, 40 notes"
+prompt = "give a midi file in D Minor, "
 
 messages = [
         {
@@ -63,7 +64,7 @@ print('inputs: ', inputs)
 print('outputs: ', outputs)
 
 # create a MIDI out port
-midi_out = mido.open_output("loopMIDI Port 2")
+midi_out = mido.open_output("Python 1")
 
 # Play the sequence of notes
 def playMidi(event,note,velocity,time):
@@ -77,19 +78,19 @@ def noteGenerator(velocity, note, tiempo):
     #print(note)
     note_one = Message('note_on', note=note, velocity=velocity)
     midi_out.send(note_one)
-    # time.sleep(bpm / random.randrange(1,4))
-    time.sleep(tiempo * random.randrange(0,5))
+    #time.sleep(bpm / random.randrange(1,4))
+    time.sleep(tiempo)
     note_off = Message('note_off', note=note, velocity=0)
     midi_out.send(note_off)
-    time.sleep(random.randrange(0,1))
+    #time.sleep(random.randrange(0,1))
     
 
 
 print(type(midi_json[0]["note"]))
 print(type(midi_json[0]["velocity"]))
 
-#MAKE THIS AND THE CHAT PAYLOAD A FUNCTION SO WE
-
+# MAKE THIS AND THE CHAT PAYLOAD A FUNCTION 
+# TO MAKE IT A GRADIO APP
 index = 0
 for n in midi_json:
     llama_event = midi_json[index]["event"]

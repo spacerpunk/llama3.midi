@@ -12,7 +12,7 @@ response = ollama.chat(
     messages=[
         {
             "role": "user",
-            "content": "what is this image?",
+            "content": "What is einstein know for?",
         },
     ],
 )

@@ -9,5 +9,4 @@ mido
 python-rtmidi
 rtmidi
 SpeechRecognition
-mlx-whisper
 PyAudio
